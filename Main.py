@@ -1,15 +1,21 @@
-from PIL import Image
+import PIL.Image as Image_1
 import openpyxl
 from openpyxl import Workbook
 from openpyxl.styles import Color,PatternFill
+from Tkinter import *
+import tkFileDialog, Tkconstants
+root=Tk()
+root.withdraw()
+fname= tkFileDialog.askopenfilename()
+
 
 workbook=Workbook()
 ws=workbook.create_sheet(title="tree")
 #ws.title="car"
-im=Image.open("trees.jpg")
+im=Image_1.open(fname)
 (w,h)=im.size
-(w,h)=(512,512*h/w)
-im=im.resize((512,512),Image.ANTIALIAS)
+(w,h)=(512,512*1.09)
+im=im.resize((512,512),Image_1.ANTIALIAS)
 imagesize=im.size
 
 pix= im.load()
@@ -39,5 +45,8 @@ for i in range(imagesize[0]):
         #co= openpyxl.styles.colors.Color(rgb='00FF0000')
         #fill=openpyxl.styles.fills.PatternFill(patternType='solid', fgColor=co)
     
+#nefname=tkFileDialog.askopenfilename()
+nefname=raw_input('Enter the Xcel Sheetname')
 
-workbook.save('t1.xlsx')
+nefname=str(nefname+'.xlsx')
+workbook.save(nefname)
